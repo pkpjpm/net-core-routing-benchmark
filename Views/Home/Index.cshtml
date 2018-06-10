@@ -2,15 +2,20 @@
     ViewData["Title"] = "Home Page";
 }
 
-<h1>ASP.NET Core MVC Crushes Routing</h1>
+<h1>ASP.NET Core MVC Routing Benchmark</h1>
 <div class="row">
     <div class="col-md-3">
         &nbsp;
     </div>
     <div class="col-md-6">
-       <p>This ASP.NET Core application supports 1,000,000 dynamically generated routes</p>
+       <p>This ASP.NET Core application supports 1,000,000 dynamically generated routes of the form "special/[route number]. They 
+           all route to the same controller. Since they are added in order, and ASP.NET Core MVC processes routes in the
+           order they were added, you can easily see how long it take to process a route template. For "special/5" only 5 
+           templates are searched (in addtion to the default); for 999999, all million templates are searched except the
+           last one. This is because the search stops as soon as a template match is found.
+       </p>
        <p>Enter a number between 1 - 999,999:<input id="testNumber" value="999999" type="text"</p>
-       <p><a id="clickLauncher" href="#">Click here</a> to see a sample</p>
+       <p><a id="clickLauncher" href="#">Click here</a> to see a how long it takes to process that many route templates</p>
     </div>
     <div class="col-md-3">
         &nbsp;
