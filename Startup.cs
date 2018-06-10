@@ -38,6 +38,8 @@ namespace route_benchmark
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            const int numberOfAdditionalRoutes = 1000000;
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -57,6 +59,14 @@ namespace route_benchmark
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+
+                for(int x = 1; x <= numberOfAdditionalRoutes; x++)
+                {
+                    routes.MapRoute(
+                        $"special route {x}", 
+                        $"special/{x}", 
+                        new {@controller = "RouteTest", @action = "Index"});
+                }
             });
         }
     }
