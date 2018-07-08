@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using route_benchmark.Models;
 
 namespace route_benchmark
 {
@@ -53,6 +54,14 @@ namespace route_benchmark
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            //insert a custom pipeline action just before routing to capture
+            //an approximate timestamp
+			app.Use(async (context, next) =>
+			{
+				context.Items[RouteTimingModel.BeforeRoutingTimestampKey] = DateTime.UtcNow;
+				await next.Invoke();
+			});
 
             app.UseMvc(routes =>
             {

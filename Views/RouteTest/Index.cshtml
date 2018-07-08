@@ -1,2 +1,5 @@
-<h1>Route test</h1>
-<p>This is a live controller</p>
+@model route_benchmark.Models.RouteTimingModel
+<h1>Route timing</h1>
+<p>Routing was started at: @Model.BeforeRoutingTimestamp.ToString("HH:mm:ss.fff")</p>
+<p>Routing was finished at: @Model.AfterRoutingTimestamp.ToString("HH:mm:ss.fff")</p>
+<p>Elapsed routing time in ms: @Model.ElapsedRoutingTime.TotalMilliseconds.ToString("N")</p>
